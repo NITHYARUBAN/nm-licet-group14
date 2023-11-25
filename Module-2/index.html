@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Todo List</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="overlay"></div>
+<div class="overlay2"></div>
+
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+  <a class="navbar-brand" href="#"><img class="logoimg" src="logo1.png" alt="Logo"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container todo-container">
+  <div class="row">
+    <div class="container To-Do"><h1>To-Do List<span class="add-task-icon"></span></h1></div>
+  </div>
+  <div class="row">
+    <form class="todo-form">
+      <h2 class="mb-4 pl-5">Add Your Todo Task<span class="add-task-icon1"></span></h2>
+      <div class="form-group">
+        <input type="text" class="form-control" id="todoItem" placeholder="Enter your task">
+      </div>
+      <button type="button" class="btn btn-primary mx-auto d-block" onclick="addTodo()">Add Task</button>
+
+      <ul class="list-group mt-3" id="todoList">
+      </ul>
+    </form>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer mt-auto py-3 text-center">
+  <div class="row">
+    <img id="footlogo" src="logo1.png" alt="logo">
+  </div>
+</footer>
+
+<!-- Bootstrap JavaScript and dependencies -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script>
+  function addTodo() {
+    var todoItem = document.getElementById("todoItem").value;
+    var todoList = document.getElementById("todoList");
+
+    if (todoItem.trim() !== "") {
+      var listItem = document.createElement("li");
+      listItem.className = "list-group-item d-flex justify-content-between align-items-center";
+
+      var label = document.createElement("label");
+      label.className = "form-check-label";
+      label.appendChild(document.createTextNode(todoItem));
+
+      var checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.className = "form-check-input ml-2"; // Add margin to the left to
+      checkbox.className = "form-check-input ml-2"; // Add margin to the left to separate text and checkbox
+
+      var removeButton = document.createElement("button");
+      removeButton.type = "button";
+      removeButton.className = "btn btn-danger btn-sm";
+      removeButton.textContent = "Remove";
+      removeButton.onclick = function () {
+        listItem.remove();
+      };
+
+      label.appendChild(checkbox);
+
+      listItem.appendChild(label);
+      listItem.appendChild(removeButton);
+
+      todoList.appendChild(listItem);
+      document.getElementById("todoItem").value = "";
+    }
+  }
+</script>
+
+</body>
+</html>
